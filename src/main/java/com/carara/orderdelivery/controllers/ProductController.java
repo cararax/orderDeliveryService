@@ -18,8 +18,8 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    private ResponseEntity<List<ProductDto>> findAll() {
-        List<ProductDto> productList = productService.findAll();
+    private ResponseEntity<List<ProductDto>> findAllByOrderByName() {
+        List<ProductDto> productList = productService.findAllByOrderByName();
         return ResponseEntity.ok().body(productList);
     }
 }

@@ -17,8 +17,8 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public List<ProductDto> findAll() {
-        List<Product> productList = productRepository.findAll();
+    public List<ProductDto> findAllByOrderByName() {
+        List<Product> productList = productRepository.findAllByOrderByNameAsc();
         return productList.stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
