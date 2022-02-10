@@ -24,7 +24,7 @@ public class Product implements Serializable {
     private String name;
     private Double price;
     private String description;
-    private Double imageUri;
+    private String imageUri;
 
     @Override
     public boolean equals(Object o) {
