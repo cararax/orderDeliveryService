@@ -3,6 +3,7 @@ package com.carara.orderdelivery.controllers;
 import com.carara.orderdelivery.dtos.OrderDto;
 import com.carara.orderdelivery.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,5 +32,15 @@ public class OrderController {
                 .buildAndExpand(orderDto.getId()).toUri();
 
         return ResponseEntity.created(uri).body(orderDto);
+    }
+
+    @PutMapping("/{id}/delivered")
+    public ResponseEntity<Object> setOrderDelivered(@PathVariable Long id) {
+        try {
+            OrderDto orderDto = orderService.setDelivered(id);
+            return ResponseEntity.ok().body(orderDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found.");
+        }
     }
 }

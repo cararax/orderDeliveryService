@@ -9,7 +9,6 @@ import com.carara.orderdelivery.repositories.OrderRepository;
 import com.carara.orderdelivery.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
@@ -45,5 +44,15 @@ public class OrderService {
         order = orderRepository.save(order);
 
         return new OrderDto(order);
+    }
+
+    @Transactional
+    public OrderDto setDelivered(Long id) {
+        Order order = orderRepository.findById(id).get();
+        order.setStatus(OrderStatus.DELIVERED);
+        order = orderRepository.save(order);
+        return new OrderDto(order);
+
+
     }
 }
